@@ -28,3 +28,20 @@ export const handleLogout = (history) => {
       });
     }
 }
+
+export const handleLogin = (email, password, history) => {
+  return(dispatch) => {
+    Auth.emailSignIn({
+      email,
+      password
+    }).then( user => {
+      // dispatch the login action
+      // push the user to the home page
+      dispatch({ type: 'LOGIN', user: user.data });
+      history.push('/');
+    }).fail( res => {
+      // TODO: handle errors for the client
+      debugger
+    })
+  }
+}
