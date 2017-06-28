@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Home from './components/Home';
+import NoMatch from './components/NoMatch';
+import NavBar from './components/NavBar';
+import Login from './components/Login';
+import Register from './components/Register';
+import { Switch, Route } from 'react-router-dom';
+import Auth from 'j-toker';
 
 class App extends Component {
+  componentDidMount() {
+    Auth.configure({ apiUrl: '/api' });
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
+          <Route component={NoMatch} />
+        </Switch>
       </div>
     );
   }
