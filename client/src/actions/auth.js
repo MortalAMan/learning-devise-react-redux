@@ -15,3 +15,16 @@ export const registerUser = (email, password, passwordConfirmation, history) => 
     });
   }
 }
+
+export const handleLogout = (history) => {
+  // make a request to log the user out
+  // dispatch a POJO to log the user out of our redux state
+  // push the user with history to the /login route
+  return(dispatch) => {
+    Auth.signOut()
+      .then( res => {
+        dispatch({ type: 'LOGOUT' });
+        history.push('/login');
+      });
+    }
+}
