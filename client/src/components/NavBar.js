@@ -3,6 +3,7 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
+import { withRouter } from 'react-router-dom';
 
 class NavBar extends Component {
   rightNavs = () => {
@@ -13,7 +14,13 @@ class NavBar extends Component {
       // only show the logout menu item
       return(
         <Menu.Menu position='right'>
-          <Menu.Item name='Logout' onClick={() => dispatch(handleLogout(history))} />
+          <Link to='/bio'>
+            <Menu.Item name='My Bio' />
+          </Link>
+          <Menu.Item
+            name='Logout'
+            onClick={() => dispatch(handleLogout(history))}
+          />
         </Menu.Menu>
       );
     } else {
@@ -50,4 +57,4 @@ const mapStateToProps = (state) => {
   return { user: state.user }
 }
 
-export default connect(mapStateToProps)(NavBar);
+export default withRouter(connect(mapStateToProps)(NavBar));
