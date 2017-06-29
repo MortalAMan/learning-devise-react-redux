@@ -1,17 +1,18 @@
-import Auth from 'j-toker';
+import axios from 'axios';
+import { setAuthHeaders } from '../utils/auth';
 
 export const registerUser = (email, password, passwordConfirmation, history) => {
   return(dispatch) => {
-    Auth.emailSignUp({
-      email,
-      password,
-      password_confirmation: passwordConfirmation
-    }).then( user => {
-      dispatch({ type: 'LOGIN', user: user.data });
-      history.push('/');
-    }).fail( res => {
-      // TODO: handle errors client side
-      debugger
+    axios.post('/api/auth', { email, password, password_confirmation: passwordConfirmation })
+      .then( res => {
+        setAuthHeaders(res.headers);
+        dispatch({ type: 'LOGIN', user: res.data.data });
+        history.push('/');
+      })
+      .catch( res => {
+        // TODO: handle errors client side
+        debugger;
+        console.log(res);
     });
   }
 }
@@ -21,27 +22,30 @@ export const handleLogout = (history) => {
   // dispatch a POJO to log the user out of our redux state
   // push the user with history to the /login route
   return(dispatch) => {
-    Auth.signOut()
+    axios.delete('/api/auth/sign_out')
       .then( res => {
+        setAuthHeaders(res.headers);
         dispatch({ type: 'LOGOUT' });
         history.push('/login');
+      })
+      .catch( res => {
+        // TODO: handle errors for the client
+        console.log(res);
       });
     }
 }
 
 export const handleLogin = (email, password, history) => {
   return(dispatch) => {
-    Auth.emailSignIn({
-      email,
-      password
-    }).then( user => {
-      // dispatch the login action
-      // push the user to the home page
-      dispatch({ type: 'LOGIN', user: user.data });
-      history.push('/');
-    }).fail( res => {
-      // TODO: handle errors for the client
-      debugger
-    })
+    axios.post('/api/auth/sign_in', { email, password })
+      .then( res => {
+        setAuthHeaders(res.headers);
+        dispatch({ type: 'LOGIN', user: res.data.data });
+        history.push('/');
+      })
+      .catch( res => {
+        // TODO: handle errors for the client
+        console.log(res);
+      })
   }
 }
