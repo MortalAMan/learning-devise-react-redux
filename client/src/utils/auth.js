@@ -9,3 +9,15 @@ export const setAuthHeaders = (headers) => {
     axios.defaults.headers.common['uid'] = headers['uid']
   }
 }
+
+export const validateToken = () => {
+  axios.get('/api/auth/validate_token', {
+    'uid': axios.defaults.headers.common['uid'],
+    'client': axios.defaults.headers.common['client'],
+    'access-token': axios.defaults.headers.common['access-token']
+  }).then( res => {
+    return res.data.data;
+  }).catch( res => {
+    return false;
+  });
+}
