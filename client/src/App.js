@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Bio from './components/Bio';
 import Flash from './components/Flash';
+import FetchUser from './components/FetchUser';
 import { Switch, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -14,14 +15,16 @@ class App extends Component {
       <div>
         <NavBar />
         <Flash />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/home' component={Home} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/bio' component={Bio} />
-          <Route component={NoMatch} />
-        </Switch>
+        <FetchUser>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/home' component={Home} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/bio' component={Bio} />
+            <Route component={NoMatch} />
+          </Switch>
+        </FetchUser>
       </div>
     );
   }
