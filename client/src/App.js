@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import Login from './components/Login';
 import Register from './components/Register';
 import Bio from './components/Bio';
+import Flash from './components/Flash';
 import { Switch, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
+        <Flash />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/home' component={Home} />

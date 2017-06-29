@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { setAuthHeaders } from '../utils/auth';
 import { Header, Button, Segment, Form } from 'semantic-ui-react';
+import { setFlash } from '../actions/flash';
+import { connect } from 'react-redux';
 
 class Bio extends Component {
 
@@ -34,13 +36,16 @@ class Bio extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { dispatch } = this.props;
+     
     axios.put('/api/bio', { bio: { body: this.state.bio } })
       .then( res => {
         setAuthHeaders(res.headers);
         this.setState({ bio: res.data.body, edit: false });
+        dispatch(setFlash('Bio Updated Successfully!', 'success'));
       })
       .catch( res => {
-        console.log(`Bio PUT Fail: ${res}`);
+        dispatch(setFlash('Bio Failed To Update!', 'error'));
       });
   }
 
@@ -77,4 +82,4 @@ class Bio extends Component {
   }
 }
 
-export default Bio;
+export default connect()(Bio);

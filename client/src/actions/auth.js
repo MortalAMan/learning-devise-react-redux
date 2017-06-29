@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAuthHeaders } from '../utils/auth';
+import { setFlash } from '../actions/flash';
 
 export const registerUser = (email, password, passwordConfirmation, history) => {
   return(dispatch) => {
@@ -10,9 +11,8 @@ export const registerUser = (email, password, passwordConfirmation, history) => 
         history.push('/');
       })
       .catch( res => {
-        // TODO: handle errors client side
-        debugger;
-        console.log(res);
+        const message = res.response.data.errors.full_messages.join(',');
+        dispatch(setFlash(message, 'error'));
     });
   }
 }
@@ -26,6 +26,7 @@ export const handleLogout = (history) => {
       .then( res => {
         setAuthHeaders(res.headers);
         dispatch({ type: 'LOGOUT' });
+        dispatch(setFlash('Logged out successfully!', 'success'));
         history.push('/login');
       })
       .catch( res => {
