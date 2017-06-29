@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Header, Segment, Form, Button } from 'semantic-ui-react';
-import { addLanguage } from '../actions/languages';
+import { Header, Segment, Form, Button, Divider, Icon, List } from 'semantic-ui-react';
+import { addLanguage, getLanguages } from '../actions/languages';
+import Language from './Language';
 
 class Languages extends Component {
   state = { language: '' };
 
-  handleSubmit = () => {
+  componentDidMount() {
+    this.props.dispatch(getLanguages());
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
     // get the language value from  state
     // dispatch the addLanguage action
     this.props.dispatch(addLanguage(this.state.language));
@@ -15,6 +21,14 @@ class Languages extends Component {
   handleChange = (e) => {
     // set component state of language to whatever the user is typing
     this.setState({ language: e.target.value });
+  }
+
+  displayLanguages = () => {
+    return this.props.languages.map( language => {
+      return(
+        <Language key={language.id} language={language} />
+      );
+    });
   }
 
   render() {
@@ -32,9 +46,17 @@ class Languages extends Component {
           </Form.Field>
           <Button primary type='submit'>Add Language</Button>
         </Form>
+        <Divider horizontal>Languages</Divider>
+        <List>
+          { this.displayLanguages() }
+        </List>
       </Segment>
     );
   }
 }
 
-export default connect()(Languages);
+const mapStateToProps = (state) => {
+  return { languages: state.languages };
+}
+
+export default connect(mapStateToProps)(Languages);
