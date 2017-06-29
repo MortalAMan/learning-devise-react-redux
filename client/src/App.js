@@ -6,13 +6,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Bio from './components/Bio';
 import { Switch, Route } from 'react-router-dom';
-import Auth from 'j-toker';
 
 class App extends Component {
-  componentDidMount() {
-    Auth.configure({ apiUrl: '/api' });
-  }
-
   render() {
     return (
       <div>
