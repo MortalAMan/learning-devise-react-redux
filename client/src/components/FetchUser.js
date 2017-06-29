@@ -28,7 +28,6 @@ class FetchUser extends Component {
 
   render() {
     // if you have HOC the children are the components nested under the HOC
-    <
     return this.state.loaded ? this.props.children : null
   }
 }
