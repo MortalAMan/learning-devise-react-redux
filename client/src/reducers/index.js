@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import user from './user'
 import flash from './flash'
+import languages from './languages';
 
 const rootReducer = combineReducers({
   user,
   flash,
+  languages,
 })
 
 export default rootReducer
@@ -13,4 +15,5 @@ export default rootReducer
 // {
 //   user: {},
 //   flash: {},
+//   languages: [],
 // }

@@ -9,6 +9,7 @@ import Flash from './components/Flash';
 import FetchUser from './components/FetchUser';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Switch, Route } from 'react-router-dom';
+import Languages from './components/Languages';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
             <ProtectedRoute exact path='/bio' component={Bio} />
+            <ProtectedRoute exact path='/languages' component={Languages} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>

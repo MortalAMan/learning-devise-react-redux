@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_one :bio, dependent: :destroy
+  has_many :languages, dependent: :destroy
 
   before_create :create_bio
   # after_create :create_bio

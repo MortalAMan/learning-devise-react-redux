@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get 'bio', to: 'bio#show'
     put 'bio', to: 'bio#update'
     # resources :bio, only: [:show, :update]
+    resources :languages, except: :show
   end
 
   #Do not place any routes below this one

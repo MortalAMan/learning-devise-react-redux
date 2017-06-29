@@ -11,11 +11,13 @@ class NavBar extends Component {
 
     if(user.id) {
       // The user is logged in
-      // only show the logout menu item
       return(
         <Menu.Menu position='right'>
           <Link to='/bio'>
             <Menu.Item name='My Bio' />
+          </Link>
+          <Link to='/languages'>
+            <Menu.Item name='My Languages' />
           </Link>
           <Menu.Item
             name='Logout'
