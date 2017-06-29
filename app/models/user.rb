@@ -8,10 +8,16 @@ class User < ActiveRecord::Base
   has_one :bio, dependent: :destroy
 
   before_create :create_bio
+  # after_create :create_bio
 
   private
 
     def create_bio
       self.bio = Bio.new(user_id: self.id)
     end
+
+    # after_create
+    # def create_bio
+    #   self.bio = Bio.create!(user_id: self.id)
+    # end
 end

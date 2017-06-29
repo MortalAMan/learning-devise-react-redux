@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     get 'bio', to: 'bio#show'
     put 'bio', to: 'bio#update'
+    # resources :bio, only: [:show, :update]
   end
 
   #Do not place any routes below this one
