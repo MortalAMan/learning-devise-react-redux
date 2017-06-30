@@ -19,7 +19,8 @@ export const addLanguage = (name) => {
 export const getLanguages = () => {
   return(dispatch) => {
     axios.get('/api/languages')
-      .then( res => {
+      .then(res => {
+        setAuthHeaders(res.headers);
         dispatch({ type: 'SET_LANGUAGES', languages: res.data });
       })
       .catch( res => {

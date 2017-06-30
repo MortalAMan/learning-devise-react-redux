@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 class Bio extends Component {
 
-  // Non Redux Way
   state = { bio: '', edit: false };
 
   componentDidMount() {
